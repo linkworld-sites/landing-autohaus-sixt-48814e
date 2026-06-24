@@ -1,12 +1,15 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import ConversionForm from "@/components/ConversionForm";
+import { track } from "@/lib/funnel";
 
 const FIELDS = [
   { name: "name", label: "Name", required: true },
+  { name: "email", label: "E-Mail", type: "email", required: true },
   { name: "phone", label: "Telefon", type: "tel" },
   { name: "subject", label: "Betreff", type: "text" },
   { name: "message", label: "Nachricht", type: "textarea" },
@@ -32,6 +35,10 @@ const INFO = [
 ];
 
 export default function ContactPage() {
+  useEffect(() => {
+    track("form_start");
+  }, []);
+
   return (
     <>
       <Nav />
